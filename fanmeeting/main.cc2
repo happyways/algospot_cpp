@@ -1,0 +1,41 @@
+#include <iostream>
+#include <algorithm>
+#include <iterator>
+
+std::string members;
+
+bool canAllHugs(std::string::const_iterator fans_iter) {
+  for ( auto iter = members.cbegin() ; iter != members.cend() ; iter++, fans_iter++ ) {
+    if ( (*iter) == 'M' && (*fans_iter) == 'M' ) {
+      return false;
+    }
+  }
+  return true;
+}
+
+void solution() {
+  std::string fans;
+
+  std::cin >> members >> fans;
+
+  auto end_iter = fans.cend();
+  advance(end_iter, -members.size() + 1);
+
+  int count = 0;
+  for ( auto iter = fans.cbegin() ; iter != end_iter ; iter++ ) {
+    if ( canAllHugs(iter) ) {
+      count++;
+    }
+  }
+
+  std::cout << count << std::endl;
+}
+
+int main() {
+  int case_count;
+  std::cin >> case_count;
+
+  for ( int c = 0 ; c < case_count ; c++ ) {
+    solution();
+  }
+}
